@@ -32,7 +32,7 @@
 
 <script>
 import { ref } from "vue";
-import { useRouter } from ".vue-router";
+import { useRouter } from "vue-router";
 import * as Yup from "yup";
 import BasicLayout from "../layouts/BasicLayout";
 import { loginApi } from "../api/user";
@@ -62,6 +62,7 @@ export default {
         try {
           const response = await loginApi(formData.value);
           if (!response?.jwt) throw "El usuario o contraseña no son validos";
+          setTokenApi(response.jwt);
           router.push("/");
         } catch (error) {
           console.log(error);
