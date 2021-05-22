@@ -58,9 +58,11 @@ export default {
       formError.value = {};
       try {
         await schemaForm.validate(formData.value, { abortEarly: false });
-
+        console.log(formData);
         try {
           const response = await loginApi(formData.value);
+          console.log(formData.value);
+          console.log(response);
           if (!response?.jwt) throw "El usuario o contraseña no son validos";
           setTokenApi(response.jwt);
           router.push("/");

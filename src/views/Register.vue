@@ -71,9 +71,9 @@ export default {
 
     const register = async () => {
       formError.value = {};
-
       try {
         await schemaForm.validate(formData.value, { abortEarly: false });
+        console.log(formData);
         try {
           const response = await registerApi(formData.value);
           console.log(response);

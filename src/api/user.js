@@ -22,14 +22,15 @@ export async function registerApi(formData){
 
 export async function loginApi(formData){
     try {
-        const url = `${API_URL}/autenthicate`
+        const url = `${API_URL}/authenticate`;
+        console.log(url);
         const params = {
             method: "POST",
             headers: {
-                "Content-type": "application/json"
+                "content-type": "application/json"
             },
-            body: JSON.stringify(formData)
-        }
+            body: JSON.stringify(formData),
+        };
         const response = await fetch(url, params);
         const result = await response.json();
         return result;
@@ -37,5 +38,4 @@ export async function loginApi(formData){
         console.log(error);
         return null;
     }
-
 }
