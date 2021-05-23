@@ -72,9 +72,12 @@ export default {
           setTokenApi(response.jwt);
           router.push("/");
         } catch (error) {
+          console.log("este error");
+
           console.log(error);
         }
       } catch (error) {
+        console.log("este error");
         error.inner.forEach((err) => {
           formError.value[err.path] = err.message;
         });
