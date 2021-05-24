@@ -8,8 +8,16 @@
             src="../assets/logo-kennedy-solo.png"
             alt="Universidad Kennedy"
           />
-          <p>Categorias...</p>
         </router-link>
+        <template v-if="token">
+          <router-link class="item" to="/newAppointment"
+            >Nuevo Turno</router-link
+          >
+          <router-link class="item" to="/myAppointments"
+            >Mis Turnos</router-link
+          >
+          <router-link class="item" to="/myData">Mis Datos</router-link>
+        </template>
       </div>
 
       <div class="right menu">
@@ -17,10 +25,9 @@
           Iniciar sesión
         </router-link>
         <template v-if="token">
-          <router-link class="item" to="/appointments">Turnos</router-link>
-          <span class="ui item waiting-room">
+          <router-link class="ui item waiting-room" to="/waiting-room">
             <i class="hospital outline icon"></i>
-          </span>
+          </router-link>
           <span class="ui item logout" @click="logout">
             <i class="sign-out icon"></i>
           </span>
@@ -73,7 +80,7 @@ export default {
   justify-content: flex-end;
 
   .logout,
-  .cart {
+  .waiting-room {
     &:hover {
       cursor: pointer;
     }
