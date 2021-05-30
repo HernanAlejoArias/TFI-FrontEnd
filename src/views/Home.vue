@@ -1,9 +1,14 @@
 <template>
-  <BasicLayout><h2>Estamos en la Home</h2> </BasicLayout>
+  <BasicLayout>
+    <div class="ui grid">
+      <h1>Estamos en la HOME...</h1>
+    </div>
+  </BasicLayout>
 </template>
 
 <script>
 import BasicLayout from "../layouts/BasicLayout";
+
 export default {
   name: "Home",
   components: {
@@ -11,3 +16,5 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped></style>
