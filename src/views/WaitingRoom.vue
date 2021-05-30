@@ -16,42 +16,53 @@
           <i class="calendar outline icon"></i>
           Su turno
         </h4>
-        <table class="ui definition table">
+        <table class="ui definition table" v-if="myAppointment">
           <tbody>
             <tr>
               <td class="two wide column">Doctor</td>
-              <td>1" x 2"</td>
+              <td>{{ myAppointment.appointment.medicalDoctor }}</td>
             </tr>
             <tr>
               <td>Especialidad</td>
-              <td>6 ounces</td>
+              <td>{{ myAppointment.appointment.specialism }}</td>
             </tr>
             <tr>
               <td>Horario</td>
-              <td>Yellowish</td>
+              <td>{{ myAppointment.appointment.time }}</td>
             </tr>
           </tbody>
         </table>
         <div class="ui mini steps fluid">
           <div class="disabled step">
             <i class="clock icon"></i>
-            <div class="content">
-              <div class="title">Turno previo</div>
-              <div class="description">Finalizado</div>
+            <div class="content" v-if="prevAppointments">
+              <div class="title">{{ prevAppointments[0].startETA }}</div>
+              <div class="description">
+                {{ prevAppointments[0].status }}
+              </div>
             </div>
           </div>
           <div class="step">
             <i class="clock icon"></i>
-            <div class="content">
-              <div class="title">Turno previo</div>
-              <div class="description">Iniciado</div>
+            <div class="content" v-if="prevAppointments">
+              <div class="title">{{ prevAppointments[1].startETA }}</div>
+              <div class="description">
+                {{ prevAppointments[1].status }}
+              </div>
             </div>
           </div>
           <div class="active step">
             <i class="clock outline icon"></i>
-            <div class="content">
-              <div class="title">Horario estimado</div>
-              <div class="description">{{ test.time }}</div>
+            <div class="content" v-if="myAppointment">
+              <div class="title">
+                Horario estimado
+              </div>
+              <div class="title">
+                {{ myAppointment.appointmentETA.startETA }}
+              </div>
+              <div class="description">
+                {{ myAppointment.appointmentETA.status }}
+              </div>
             </div>
           </div>
         </div>
@@ -81,15 +92,18 @@ export default {
     BasicLayout,
   },
   setup() {
-    let appointments = ref(null);
-    let test = { time: "16:55", status: "En horario" };
+    let prevAppointments = ref(null);
+    let myAppointment = ref(null);
 
     onMounted(async () => {
       const response = await getWaitingRoom();
-      console.log(response);
+      prevAppointments.value = response.prevAppointments;
+      myAppointment.value = response.userAppointment;
+      console.log(myAppointment);
     });
     return {
-      test,
+      prevAppointments,
+      myAppointment,
     };
   },
 };
