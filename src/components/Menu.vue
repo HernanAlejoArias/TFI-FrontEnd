@@ -10,10 +10,10 @@
           />
         </router-link>
         <template v-if="token">
-          <router-link class="item" to="/newAppointment"
+          <router-link class="item" to="/new-appointment"
             >Nuevo Turno</router-link
           >
-          <router-link class="item" to="/myAppointments"
+          <router-link class="item" to="/my-appointments"
             >Mis Turnos</router-link
           >
           <router-link class="item" to="/myData">Mis Datos</router-link>

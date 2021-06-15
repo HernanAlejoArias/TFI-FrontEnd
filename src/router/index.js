@@ -3,6 +3,9 @@ import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import WaitingRoom from '../views/WaitingRoom.vue';
+import NewAppointment from '../views/NewAppointment.vue';
+import MyAppointments from '../views/MyAppointments.vue';
+
 
 const routes = [
   {
@@ -25,6 +28,16 @@ const routes = [
     name: 'WaitingRoom',
     component: WaitingRoom
   },
+  {
+    path: '/new-appointment',
+    name: 'NewAppointment',
+    component: NewAppointment
+  },  
+  {
+    path: '/my-appointments',
+    name: 'MyAppointments',
+    component: MyAppointments
+  }, 
 ]
 
 const router = createRouter({
