@@ -13,44 +13,156 @@
         </div>
         <div class="field">
           <input
-            type="text"
-            placeholder="Fecha"
+            type="date"
             v-model="formData.date"
             :class="{ error: formError.date }"
           />
         </div>
         <div class="field">
           <input
-            type="text"
-            placeholder="Hora"
+            type="time"
             v-model="formData.time"
             :class="{ error: formError.time }"
           />
         </div>
-        <div class="field">
-          <label>Día</label>
-          <select name="day" class="ui dropdown">
-            <option value="">Elija el día</option>
-            <option value="Lunes">Lunes</option>
-            <option value="Martes">Martes</option>
-            <option value="Miércoles">Miércoles</option>
-            <option value="Jueves">Jueves</option>
-            <option value="Viernes">Viernes</option>
-          </select>
+        <div class="ui divider"></div>
+        <h3>Puede adelantarse su turno en el mismo día?</h3>
+        <div class="grouped fields">
+          <label>Cuanto tiempo de anticipación necesita?</label>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input
+                type="radio"
+                name="EarlyDayAppointment"
+                checked="checked"
+                value="0"
+                v-model="formData.EarlyDayAppointment"
+              />
+              <label>No Adelantar</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input
+                type="radio"
+                name="EarlyDayAppointment"
+                value="10"
+                v-model="formData.EarlyDayAppointment"
+              />
+              <label>10 minutos</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input
+                type="radio"
+                name="EarlyDayAppointment"
+                value="30"
+                v-model="formData.EarlyDayAppointment"
+              />
+              <label>30 minutos</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input
+                type="radio"
+                name="EarlyDayAppointment"
+                value="60"
+                v-model="formData.EarlyDayAppointment"
+              />
+              <label>1 hora</label>
+            </div>
+          </div>
         </div>
-        <div class="time">
-          <label>Horario</label>
-          <select class="ui dropdown">
-            <option value="">Elija el horario</option>
-            <option value="Mañana">Mañana</option>
-            <option value="Tarde">Tarde</option>
-          </select>
+
+        <div class="ui divider"></div>
+        <h3>Desea adelantar su turno?</h3>
+        <p>
+          En el caso de presentarse la posibilidad de re-agendar su turno, desea
+          que sea considerado?
+        </p>
+        <div class="ui six column grid">
+          <div class="row">
+            <div class="column">
+              <p>Selecciones los días posibles</p>
+            </div>
+            <div class="column">
+              <div class="ui toggle checkbox">
+                <input
+                  type="checkbox"
+                  name="early_monday"
+                  v-model="formData.EarlyMonday"
+                />
+                <label>Lunes</label>
+              </div>
+            </div>
+            <div class="column">
+              <div class="ui toggle checkbox">
+                <input
+                  type="checkbox"
+                  name="early_tuesday"
+                  v-model="formData.EarlyTuesday"
+                />
+                <label>Martes</label>
+              </div>
+            </div>
+            <div class="column">
+              <div class="ui toggle checkbox">
+                <input
+                  type="checkbox"
+                  name="early_wednesday"
+                  v-model="formData.EarlyWednesday"
+                />
+                <label>Miércoles</label>
+              </div>
+            </div>
+            <div class="column">
+              <div class="ui toggle checkbox">
+                <input
+                  type="checkbox"
+                  name="early_thrusday"
+                  v-model="formData.EarlyThrusday"
+                />
+                <label>Jueves</label>
+              </div>
+            </div>
+            <div class="column">
+              <div class="ui toggle checkbox">
+                <input
+                  type="checkbox"
+                  name="early_friday"
+                  v-model="formData.EarlyFriday"
+                />
+                <label>Viernes</label>
+              </div>
+            </div>
+          </div>
         </div>
-        <button
-          type="submit"
-          class="ui button fluid primary"
-          :class="{ loading }"
-        >
+        <div class="inline fields">
+          <label></label>
+        </div>
+        <div class="ui six column grid">
+          <div class="row">
+            <div class="column">
+              <p>En que momento del día?</p>
+            </div>
+            <div class="column">
+              <div class="ui toggle checkbox">
+                <input type="checkbox" name="early_morning" />
+                <label>Mañana</label>
+              </div>
+            </div>
+            <div class="column">
+              <div class="ui toggle checkbox">
+                <input type="checkbox" name="early_afternoon" />
+                <label>Tarde</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ui divider"></div>
+        <button type="submit" class="ui button primary" :class="{ loading }">
           Guardar
         </button>
       </form>

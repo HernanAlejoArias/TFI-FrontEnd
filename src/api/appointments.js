@@ -68,8 +68,9 @@ export async function cancelAppointmentApi(idAppointment){
 
 export async function registerAppointmentApi(formData){
     try {
-        const url = `${API_URL}/register`;
+        const url = `${API_URL}/register-appointment`;
         console.log(url);
+        console.log(formData);
         const params = {
             method: "POST",
             headers: {
