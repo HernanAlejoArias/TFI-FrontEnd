@@ -50,6 +50,7 @@
 import { ref, onMounted } from "vue";
 import BasicLayout from "../layouts/BasicLayout";
 import { getMyAppointments } from "../api/appointments.js";
+
 export default {
   name: "MyAppointments",
   components: {

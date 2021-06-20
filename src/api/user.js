@@ -21,6 +21,8 @@ export async function registerApi(formData){
 }
 
 export async function loginApi(formData){
+
+    console.log(formData);
     try {
         const url = `${API_URL}/authenticate`;
         console.log(url);

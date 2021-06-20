@@ -3,14 +3,26 @@
     <div class="register-appointment">
       <h2>Nuevo Turno</h2>
       <form class="ui form" @submit.prevent="registerAppointment">
-        <div class="field">
+        <select
+          name="MedicalDoctorDropdown"
+          class="ui dropdown"
+          id="select"
+          v-model="formData.md"
+          :class="{ error: formError.md }"
+        >
+          <option value="">Seleccione el Médico</option>
+          <option value="1">Dermatologo: Nelida Esposito</option>
+          <option value="2">Clínico: José Lucia</option>
+        </select>
+        <!-- <div class="field">
           <input
             type="text"
             placeholder="Médico"
             v-model="formData.md"
             :class="{ error: formError.md }"
           />
-        </div>
+        </div> -->
+        <p></p>
         <div class="field">
           <input
             type="date"
@@ -36,7 +48,7 @@
                 name="EarlyDayAppointment"
                 checked="checked"
                 value="0"
-                v-model="formData.EarlyDayAppointment"
+                v-model="formData.earlyDayAppointment"
               />
               <label>No Adelantar</label>
             </div>
@@ -47,7 +59,7 @@
                 type="radio"
                 name="EarlyDayAppointment"
                 value="10"
-                v-model="formData.EarlyDayAppointment"
+                v-model="formData.earlyDayAppointment"
               />
               <label>10 minutos</label>
             </div>
@@ -58,7 +70,7 @@
                 type="radio"
                 name="EarlyDayAppointment"
                 value="30"
-                v-model="formData.EarlyDayAppointment"
+                v-model="formData.earlyDayAppointment"
               />
               <label>30 minutos</label>
             </div>
@@ -69,7 +81,7 @@
                 type="radio"
                 name="EarlyDayAppointment"
                 value="60"
-                v-model="formData.EarlyDayAppointment"
+                v-model="formData.earlyDayAppointment"
               />
               <label>1 hora</label>
             </div>
@@ -92,7 +104,7 @@
                 <input
                   type="checkbox"
                   name="early_monday"
-                  v-model="formData.EarlyMonday"
+                  v-model="formData.earlyMonday"
                 />
                 <label>Lunes</label>
               </div>
@@ -102,7 +114,7 @@
                 <input
                   type="checkbox"
                   name="early_tuesday"
-                  v-model="formData.EarlyTuesday"
+                  v-model="formData.earlyTuesday"
                 />
                 <label>Martes</label>
               </div>
@@ -112,7 +124,7 @@
                 <input
                   type="checkbox"
                   name="early_wednesday"
-                  v-model="formData.EarlyWednesday"
+                  v-model="formData.earlyWednesday"
                 />
                 <label>Miércoles</label>
               </div>
@@ -122,7 +134,7 @@
                 <input
                   type="checkbox"
                   name="early_thrusday"
-                  v-model="formData.EarlyThrusday"
+                  v-model="formData.earlyThrusday"
                 />
                 <label>Jueves</label>
               </div>
@@ -132,7 +144,7 @@
                 <input
                   type="checkbox"
                   name="early_friday"
-                  v-model="formData.EarlyFriday"
+                  v-model="formData.earlyFriday"
                 />
                 <label>Viernes</label>
               </div>
@@ -149,13 +161,21 @@
             </div>
             <div class="column">
               <div class="ui toggle checkbox">
-                <input type="checkbox" name="early_morning" />
+                <input
+                  type="checkbox"
+                  name="early_morning"
+                  v-model="formData.earlyMorning"
+                />
                 <label>Mañana</label>
               </div>
             </div>
             <div class="column">
               <div class="ui toggle checkbox">
-                <input type="checkbox" name="early_afternoon" />
+                <input
+                  type="checkbox"
+                  name="early_afternoon"
+                  v-model="formData.earlyAfternoon"
+                />
                 <label>Tarde</label>
               </div>
             </div>
@@ -172,8 +192,9 @@
 
 <script>
 import BasicLayout from "../layouts/BasicLayout";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import * as Yup from "yup";
+import { registerAppointmentApi } from "../api/appointments.js";
 
 export default {
   name: "NewAppointment",
@@ -185,6 +206,16 @@ export default {
     let formError = ref({});
     let loading = false;
 
+    onMounted(() => {
+      formData.value.earlyMonday = false;
+      formData.value.earlyTuesday = false;
+      formData.value.earlyWednesday = false;
+      formData.value.earlyThrusday = false;
+      formData.value.earlyFriday = false;
+      formData.value.earlyMorning = false;
+      formData.value.earlyAfternoon = false;
+    });
+
     const schemaForm = Yup.object().shape({
       md: Yup.string().required(),
       date: Yup.string().required(),
@@ -195,7 +226,7 @@ export default {
       formError.value = {};
       try {
         await schemaForm.validate(formData.value, { abortEarly: false });
-        console.log(formData);
+
         try {
           const response = await registerAppointmentApi(formData.value);
           console.log(response);
