@@ -36,7 +36,7 @@ export async function getMyAppointments(){
         };
         const response = await fetch(url, params);
         const result = await response.json();
-        return result; 
+        return result.appointments; 
     } catch (error) {
         console.log(error);
         return null;
@@ -71,18 +71,6 @@ export async function registerAppointmentApi(formData){
         const url = `${API_URL}/register-appointment`;
         console.log(url);
         console.log(formData);
-
-        // formDataToCaller.md = formData.value.md;
-        // formDataToCaller.date = formData.value.date;
-        // formDataToCaller.time = formData.value.time;
-        // formDataToCaller.earlyDayAppointment = formData.value.earlyDayAppointment;
-        // formDataToCaller.earlyMonday = formData.value.earlyMonday;
-        // formDataToCaller.earlyTuesday = formData.value.earlyTuesday;
-        // formDataToCaller.earlyWednesday = formData.value.earlyWednesday;
-        // formDataToCaller.earlyThrusday = formData.value.earlyThrusday;
-        // formDataToCaller.earlyFriday = formData.value.earlyFriday;
-        // formDataToCaller.earlyMorning = formData.value.earlyMorning;
-        // formDataToCaller.earlyAfternoon = formData.value.earlyAfternoon;
 
         const params = {
             method: "POST",

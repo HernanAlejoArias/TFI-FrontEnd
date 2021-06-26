@@ -1,7 +1,7 @@
 <template>
   <BasicLayout>
-    <div class="ui grid">
-      <h1>Estamos en la HOME...</h1>
+    <div class="ui container">
+      <img class="homepage" src="../assets/homepage.png" alt="Home" />
     </div>
   </BasicLayout>
 </template>
@@ -17,4 +17,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.homepage {
+  width: 100%;
+  height: auto;
+}
+</style>

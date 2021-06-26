@@ -69,10 +69,10 @@
         <div class="ui two column centered grid">
           <div class="four column centered row">
             <div class="column">
-              <button class="fluid ui button">One</button>
+              <button class="ui primary basic button fluid">Confirmar</button>
             </div>
             <div class="column">
-              <button class="fluid ui button">Two</button>
+              <button class="ui negative basic button fluid">Cancelar</button>
             </div>
           </div>
         </div>
