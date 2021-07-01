@@ -48,8 +48,12 @@
 
 <script>
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import BasicLayout from "../layouts/BasicLayout";
-import { getMyAppointments } from "../api/appointments.js";
+import {
+  getMyAppointments,
+  cancelAppointmentApi,
+} from "../api/appointments.js";
 
 export default {
   name: "MyAppointments",
@@ -58,8 +62,15 @@ export default {
   },
   setup() {
     let myAppointments = ref(null);
+    const router = useRouter();
+
     const cancelAppointment = (idApp) => {
-      cancelAppointmentApi(idpp);
+      try {
+        cancelAppointmentApi(idApp);
+        router.push("/my-appointments");
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     onMounted(async () => {

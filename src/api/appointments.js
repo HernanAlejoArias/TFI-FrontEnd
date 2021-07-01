@@ -45,16 +45,18 @@ export async function getMyAppointments(){
 
 export async function cancelAppointmentApi(idAppointment){
 
+    console.log("CancelAppointment");
+
     try {
-        
-        const url = `${API_URL}/cancel-appointment`; 
+        console.log("aca?")
+        const url = `${API_URL}/cancel-appointment/${idAppointment}`; 
+        console.log(url);
         const params = {
             method: "POST",
             headers: {
                 "content-type": "application/json",
                 "authorization": "Bearer " + getTokenApi()
             },
-            body: JSON.stringify(idAppointment),
         };
 
         const response = await fetch(url, params);
