@@ -67,7 +67,7 @@ export default {
     const cancelAppointment = (idApp) => {
       try {
         cancelAppointmentApi(idApp);
-        router.push("/my-appointments");
+        window.location.reload();
       } catch (error) {
         console.log(error);
       }
